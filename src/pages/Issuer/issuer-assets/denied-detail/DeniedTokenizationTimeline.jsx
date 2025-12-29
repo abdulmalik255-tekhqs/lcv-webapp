@@ -1,0 +1,121 @@
+import { useState } from "react";
+import { FaArrowRight, FaCheck, FaCircle } from "react-icons/fa6";
+
+const DeniedTokenizationTimeline = ({ currentStep = 3 }) => {
+  const [completedSteps, setCompletedSteps] = useState([2]);
+
+  const steps = [
+    {
+      id: 1,
+      label: "Issuer Asset Submission",
+      date: "Nov 15, 2025",
+      completed: true,
+    },
+    {
+      id: 2,
+      label: "Registrar Denied",
+      date: "REG-2025-001",
+      completed: false,
+      isCurrent: true,
+    },
+    {
+      id: 3,
+      label: "Mint Tokens",
+      date: null,
+      completed: false,
+    },
+    {
+      id: 4,
+      label: "Ready to Published",
+      date: null,
+      completed: false,
+      isCurrent: false,
+    },
+  ];
+
+  const handleStepClick = (step) => {
+    if (step.actionRequired && !completedSteps.includes(step.id)) {
+      setCompletedSteps((prev) => [...prev, step.id]);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <span className="text-[15px] font-medium text-[#000] !font-['Montserrat']">
+        Tokenization Timeline
+      </span>
+      <div className="relative">
+        {/* Vertical line */}
+        <div className="absolute left-2.5 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+
+        {steps.map((step, index) => {
+          const isStepCompleted =
+            completedSteps.includes(step.id) || step.completed;
+          const isCurrent = step.isCurrent && !isStepCompleted;
+          const isFuture = !isStepCompleted && !isCurrent;
+          const hasActionRequired = step.actionRequired && !isStepCompleted;
+
+          return (
+            <div
+              key={step.id}
+              className={`relative flex items-start gap-4 pb-6 last:pb-0 ${
+                hasActionRequired ? "cursor-pointer hover:opacity-80" : ""
+              }`}
+              onClick={() => hasActionRequired && handleStepClick(step)}
+            >
+              {/* Icon */}
+              <div className="relative z-10 flex-shrink-0">
+                {isStepCompleted ? (
+                  <div className="w-6 h-6 rounded-full bg-[#D70015] flex items-center justify-center">
+                    <FaCheck className="w-3 h-3 text-white" />
+                  </div>
+                ) : isCurrent ? (
+                  <div className="w-6 h-6  rounded-full !bg-white !border-2 !border-[#D70015] flex items-center justify-center">
+                    <FaArrowRight className="w-3 h-3 text-[#D70015]" />
+                  </div>
+                ) : (
+                  <div className="w-6 h-6 rounded-full !bg-white !border-2 !border-[#D70015] flex items-center justify-center">
+                    <FaArrowRight className="w-3 h-3 text-[#D70015]" />
+                  </div>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 pt-1">
+                <div className="flex items-center gap-2">
+                  <p
+                    className={`text-sm font-medium ${
+                      isStepCompleted || isCurrent
+                        ? "text-[#000]"
+                        : "text-[#000]"
+                    }`}
+                  >
+                    {step.label}
+                  </p>
+                  {hasActionRequired && (
+                    <span className="text-xs font-medium text-[#0734A9]">
+                      Action Required
+                    </span>
+                  )}
+                </div>
+                {step.date && (
+                  <p
+                    className={`text-xs ${
+                      isStepCompleted || isCurrent
+                        ? "text-gray-600"
+                        : "text-[#000]"
+                    }`}
+                  >
+                    {step.date}
+                  </p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default DeniedTokenizationTimeline;

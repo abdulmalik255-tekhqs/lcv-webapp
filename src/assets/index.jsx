@@ -1,0 +1,5 @@
+export { default as Logo } from './Logo.jsx'
+export { default as AuthIllustration } from './AuthIllustration.jsx'
+export { default as DashboardIllustration } from './DashboardIllustration.jsx'
+export { default as LoginFooter } from './LoginFooter.jsx'
+export { default as FieldCross } from './FieldCross.jsx'

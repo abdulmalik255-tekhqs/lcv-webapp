@@ -1,0 +1,2 @@
+export { useGetRegistrars } from "./useGetRegistrars";
+

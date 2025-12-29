@@ -1,0 +1,44 @@
+name: liberty-frontend deploy for main branch
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+ 
+jobs:
+  ssh_on_push:
+    name: SSH on push
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Connect via SSH and deploy (push)
+        uses: appleboy/ssh-action@v0.1.10
+        timeout-minutes: 2
+        with:
+          host: ${{ secrets.EC2_HOST_WEB3 }}
+          username: ${{ secrets.EC2_USER_WEB3 }}
+          key: ${{ secrets.EC2_SSH_KEY_WEB3 }}
+          # port: ${{ secrets.EC2_SSH_PORT_WEB3 || 22 }}
+          script_stop: true
+          script: |
+            set -e
+            echo "🚀 Push detected on main: ${{ github.sha }}"
+            echo "✅ Connected to $(hostname)"
+
+            cd /home/ubuntu/liberty
+            git fetch --all --prune
+            # Ensure this server tracks the main branch
+            git checkout main
+            git reset --hard main
+            git pull origin main
+
+            # npm install
+            npm install
+
+            # npm run build
+            npm run build
+
+
+            # Restart or start via PM2
+            pm2 restart liberty-frontend-rwa

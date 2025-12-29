@@ -1,0 +1,2 @@
+export { useGetInvestorStats } from "./useGetInvestorStats";
+

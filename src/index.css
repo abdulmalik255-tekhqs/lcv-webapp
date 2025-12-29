@@ -1,0 +1,345 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atacama';
+  src: url('./assets/atacama/AtacamaTrial-VF-BF63b76d7eda2cb.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-stretch: condensed;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atacama';
+  src: url('./assets/atacama/AtacamaTrialItalic-VF-BF63b76d7edbdff.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-stretch: condensed;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    @apply font-sans;
+  }
+
+  :root {
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-slate-100 text-slate-900 min-h-screen font-sans;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  a {
+    @apply text-primary-600 underline-offset-4 transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply text-primary-500;
+  }
+}
+
+/* Transparent scrollbar styles */
+* {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+}
+
+.font-atacama {
+  font-family: 'Atacama', 'Montserrat', sans-serif;
+}
+
+/* Force white background for filled inputs */
+.input-filled-white,
+input.input-filled-white,
+input.peer.input-filled-white,
+.peer.input-filled-white {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Override browser autofill styles */
+input.input-filled-white:-webkit-autofill,
+input.input-filled-white:-webkit-autofill:hover,
+input.input-filled-white:-webkit-autofill:focus,
+input.input-filled-white:-webkit-autofill:active,
+.peer.input-filled-white:-webkit-autofill,
+.peer.input-filled-white:-webkit-autofill:hover,
+.peer.input-filled-white:-webkit-autofill:focus,
+.peer.input-filled-white:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #1f2937 !important;
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Override any focus states */
+input.input-filled-white:focus,
+.peer.input-filled-white:focus {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* General autofill override for all inputs with white background */
+input.bg-white:-webkit-autofill,
+input.bg-white:-webkit-autofill:hover,
+input.bg-white:-webkit-autofill:focus,
+input.bg-white:-webkit-autofill:active,
+input[style*="background-color: white"]:-webkit-autofill,
+input[style*="background-color: white"]:-webkit-autofill:hover,
+input[style*="background-color: white"]:-webkit-autofill:focus,
+input[style*="background-color: white"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+  background-color: white !important;
+  background: white !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Select option styling - limited browser support */
+select option {
+  height: 20px;
+  line-height: 40px;
+  padding: 8px 0;
+  min-height: 20px;
+}
+
+/* Style select when multiple options visible */
+select[size] {
+  overflow-y: auto;
+}
+
+select[size] option {
+  height: 40px;
+  line-height: 40px;
+}
+
+/* Year selector dropdown styling */
+select.year-selector option {
+  height: 20px;
+  line-height: 40px;
+  padding: 8px 0;
+  min-height: 40px;
+}
+
+/* If year selector is used as listbox (with size attribute) */
+select.year-selector[size] {
+  max-height: 30px;
+  overflow-y: auto;
+}
+
+select.year-selector[size] option {
+  height: 40px;
+  line-height: 40px;
+  padding: 8px 0;
+}
+
+/* Scrollbar styling for year selector when used as listbox */
+select.year-selector[size]::-webkit-scrollbar {
+  width: 8px;
+}
+
+select.year-selector[size]::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+select.year-selector[size]::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+select.year-selector[size]::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* Custom Toast Animations - Slide up from bottom with gentle curve, no bounce */
+@keyframes slideUpGentle {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownGentle {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideDownFromTop {
+  from {
+    transform: translateY(-110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpToTop {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110%);
+    opacity: 0;
+  }
+}
+
+/* Toast entering animations based on position */
+.toast-entering {
+  animation: slideUpGentle 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Toast closing animations based on position */
+.toast-closing {
+  animation: slideDownGentle 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+}
+
+/* Override animations for top-positioned toasts */
+[class*="top-"] .toast-entering {
+  animation: slideDownFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+[class*="top-"] .toast-closing {
+  animation: slideUpToTop 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+}
+
+/* Toast item styling */
+.toast-item {
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.toast-item:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Button Loading Animation - Border fill from left to right */
+@keyframes borderFillLeftToRight {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.btn-gradient-loading {
+  position: relative;
+  background: white !important;
+  background-image: none !important;
+  color: black !important;
+  overflow: hidden;
+}
+
+.btn-upload-loading {
+  position: relative;
+  background: white !important;
+  background-image: none !important;
+  color: black !important;
+  overflow: hidden;
+}
+
+
+.btn-gradient-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.6px;
+  background: linear-gradient(to right, #0734A9, #0E1696, #4B0792);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: borderFillLeftToRight 1.5s cubic-bezier(0.2, 0, 0.4, 1) forwards;
+}
+
+.btn-upload-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.6px;
+  background: linear-gradient(to right, #0734A9, #0E1696, #4B0792);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: borderFillLeftToRight 1.5s cubic-bezier(0.2, 0, 0.4, 1) forwards;
+}
